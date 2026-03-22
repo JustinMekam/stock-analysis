@@ -12,10 +12,18 @@ type Signal = {
   whyItMatters: string;
 };
 
+type Supplier = {
+  name: string;
+  provides: string;
+  riskLevel: "High" | "Medium" | "Low";
+  disruptionNote: string;
+};
+
 type StockData = {
   companyName: string;
   description: string;
   keyExposures: string[];
+  keySuppliers: Supplier[];
   businessStages: string[];
   recentSignals: Signal[];
   investorTakeaway: string;
@@ -39,6 +47,43 @@ const stocks: StockDatabase = {
       "Raw material and freight input costs (cotton, rubber, ocean shipping)",
       "Competitive pressure from Adidas, On Running, Hoka, and New Balance",
       "Direct-to-consumer mix shift and its effect on margins",
+    ],
+    keySuppliers: [
+      {
+        name: "Pou Chen Group",
+        provides: "Footwear manufacturing — largest Nike factory partner globally",
+        riskLevel: "High",
+        disruptionNote:
+          "Pou Chen operates massive facilities in Vietnam and Indonesia. A labor strike, factory fire, or regional lockdown at Pou Chen directly reduces Nike's footwear output and can delay seasonal product launches.",
+      },
+      {
+        name: "Eclat Textile",
+        provides: "Performance apparel fabrics and finished garments",
+        riskLevel: "Medium",
+        disruptionNote:
+          "Eclat supplies high-performance knit fabrics used in Nike's Dri-FIT and premium apparel lines. Disruption affects the higher-margin apparel segment more than footwear.",
+      },
+      {
+        name: "Feng Tay Enterprises",
+        provides: "Footwear manufacturing (Vietnam-based)",
+        riskLevel: "High",
+        disruptionNote:
+          "Feng Tay is one of Nike's top three footwear manufacturers and is concentrated in Vietnam. Any Vietnam-wide supply shock — tariffs, flooding, or labor unrest — hits Feng Tay directly.",
+      },
+      {
+        name: "Makalot Industrial",
+        provides: "Apparel manufacturing across Southeast Asia",
+        riskLevel: "Low",
+        disruptionNote:
+          "Makalot produces lower-complexity apparel items. Disruption would affect volume but Nike has more flexibility to shift apparel orders than footwear given lower switching costs.",
+      },
+      {
+        name: "YuPoong / Headwear Suppliers",
+        provides: "Caps, headwear, and accessories",
+        riskLevel: "Low",
+        disruptionNote:
+          "Accessories are a small revenue contributor. Disruption here has minimal impact on Nike's core financials.",
+      },
     ],
     businessStages: [
       "1. Raw Materials — Cotton, rubber, and synthetic inputs sourced globally",
@@ -101,6 +146,43 @@ const stocks: StockDatabase = {
       "Competitive pressure from Nike, New Balance, and emerging performance brands",
       "Inventory overhang risk from excess Yeezy stock following brand partnership termination",
     ],
+    keySuppliers: [
+      {
+        name: "Pou Chen Group",
+        provides: "Footwear manufacturing — shared major supplier with Nike",
+        riskLevel: "High",
+        disruptionNote:
+          "Pou Chen is also one of Adidas's largest footwear manufacturers, primarily in Vietnam. A single supply shock at Pou Chen can hurt both Adidas and Nike simultaneously, limiting the industry's ability to absorb production elsewhere.",
+      },
+      {
+        name: "Yue Yuen Industrial",
+        provides: "Footwear manufacturing (subsidiary of Pou Chen)",
+        riskLevel: "High",
+        disruptionNote:
+          "Yue Yuen is the world's largest branded athletic and casual footwear manufacturer. It produces a significant share of Adidas's footwear volume. Labor strikes at Yue Yuen — which have occurred historically — directly impact delivery timelines.",
+      },
+      {
+        name: "Eclat Textile",
+        provides: "Performance fabrics for apparel",
+        riskLevel: "Medium",
+        disruptionNote:
+          "Eclat supplies technical fabrics across Adidas's performance apparel lines. A disruption would affect premium product availability more than core basics.",
+      },
+      {
+        name: "Tex-Ray Industrial",
+        provides: "Apparel and sportswear manufacturing",
+        riskLevel: "Low",
+        disruptionNote:
+          "Tex-Ray handles mid-tier apparel production. Adidas has more flexibility to reallocate apparel orders compared to footwear given lower complexity.",
+      },
+      {
+        name: "Regional Cambodia Factories",
+        provides: "Low-cost apparel and basics manufacturing",
+        riskLevel: "Medium",
+        disruptionNote:
+          "Adidas has shifted some production to Cambodia to reduce Vietnam concentration. Political instability or labor disruption in Cambodia is a growing watch item given increased reliance.",
+      },
+    ],
     businessStages: [
       "1. Raw Materials — Polyester, rubber, and leather inputs sourced via suppliers",
       "2. Third-Party Manufacturing — Primarily in Vietnam, Cambodia, and China",
@@ -162,6 +244,50 @@ const stocks: StockDatabase = {
       "Foreign exchange exposure across major markets (EUR, CNY, JPY)",
       "Services revenue growth rate and regulatory risk to App Store business model",
     ],
+    keySuppliers: [
+      {
+        name: "TSMC (Taiwan Semiconductor)",
+        provides: "Apple Silicon chips — A-series and M-series processors",
+        riskLevel: "High",
+        disruptionNote:
+          "TSMC fabricates virtually all of Apple's custom chips in Taiwan. A geopolitical escalation between China and Taiwan, a natural disaster, or a production yield problem at TSMC would halt Apple's ability to build iPhones, Macs, and iPads. This is Apple's single highest-concentration supply risk.",
+      },
+      {
+        name: "Foxconn (Hon Hai Precision)",
+        provides: "iPhone and iPad final assembly — largest Apple manufacturer",
+        riskLevel: "High",
+        disruptionNote:
+          "Foxconn assembles the majority of iPhones at its massive Zhengzhou facility in China. COVID-era lockdowns at Foxconn directly caused Apple to miss iPhone 14 Pro shipment targets in late 2022, demonstrating the real revenue impact of disruption here.",
+      },
+      {
+        name: "Samsung Display / LG Display",
+        provides: "OLED and LCD screens for iPhone, iPad, and MacBook",
+        riskLevel: "Medium",
+        disruptionNote:
+          "Apple sources premium OLED panels from Samsung and LG. A display supply shortage would constrain Pro iPhone production specifically, as OLED panels are harder to substitute than LCD. Apple has been developing its own display tech to reduce this dependency.",
+      },
+      {
+        name: "Pegatron",
+        provides: "iPhone assembly — secondary manufacturer to Foxconn",
+        riskLevel: "Medium",
+        disruptionNote:
+          "Pegatron handles a portion of iPhone assembly, primarily for older or mid-tier models. It provides some manufacturing redundancy against Foxconn disruption, though it cannot absorb Foxconn's full volume.",
+      },
+      {
+        name: "Murata Manufacturing",
+        provides: "Capacitors, filters, and wireless components",
+        riskLevel: "Medium",
+        disruptionNote:
+          "Murata supplies critical passive components and wireless chips used across Apple's device lineup. A shortage of these components — as seen during the broader semiconductor shortage — can create production bottlenecks even when chip supply is stable.",
+      },
+      {
+        name: "Luxshare Precision",
+        provides: "AirPods and Apple Watch assembly",
+        riskLevel: "Low",
+        disruptionNote:
+          "Luxshare assembles AirPods and Apple Watch, which are important but smaller revenue contributors relative to iPhone. Disruption here would not materially affect Apple's top line.",
+      },
+    ],
     businessStages: [
       "1. Components & Chips — Apple Silicon designed in-house; fabricated by TSMC in Taiwan",
       "2. Component Sourcing — Displays (Samsung/LG), cameras, memory, and sensors from global suppliers",
@@ -222,6 +348,50 @@ const stocks: StockDatabase = {
       "Airline industry health and travel demand, which drives orders and delivery appetite",
       "Defense and government contract performance and U.S. defense budget cycles",
       "Labor relations — strikes or slowdowns in manufacturing workforce",
+    ],
+    keySuppliers: [
+      {
+        name: "Spirit AeroSystems",
+        provides: "737 fuselages and 787 composite structures",
+        riskLevel: "High",
+        disruptionNote:
+          "Spirit AeroSystems is Boeing's most critical external supplier. It manufactures the 737 MAX fuselage at its Wichita, Kansas facility. Quality defects found in Spirit-produced fuselages in 2024 directly triggered FAA production caps on Boeing, causing delivery shortfalls and revenue misses. Boeing announced plans to reacquire Spirit to regain control of this bottleneck.",
+      },
+      {
+        name: "GE Aerospace / CFM International",
+        provides: "LEAP-1B engines for the 737 MAX",
+        riskLevel: "High",
+        disruptionNote:
+          "CFM International (a GE-Safran joint venture) is the sole engine supplier for the 737 MAX. Any production shortfall or quality issue with LEAP engines halts 737 deliveries, as Boeing cannot ship aircraft without certified engines installed.",
+      },
+      {
+        name: "Rolls-Royce",
+        provides: "Trent 1000 engines for the 787 Dreamliner",
+        riskLevel: "High",
+        disruptionNote:
+          "Rolls-Royce supplies Trent 1000 engines for a portion of 787 orders. Historical durability issues with Trent 1000 blades grounded in-service 787s and caused delivery delays, directly impacting Boeing's widebody program revenue.",
+      },
+      {
+        name: "Safran",
+        provides: "Landing gear systems and nacelles for multiple Boeing programs",
+        riskLevel: "Medium",
+        disruptionNote:
+          "Safran provides landing gear and nacelle components across Boeing's commercial fleet. A production delay at Safran creates a line-stoppage risk at Boeing's final assembly facilities.",
+      },
+      {
+        name: "Ducommun",
+        provides: "Structural components, titanium parts, and electronics",
+        riskLevel: "Medium",
+        disruptionNote:
+          "Ducommun supplies structural parts used in multiple Boeing programs. Titanium supply constraints — particularly following Russia sanctions, as Russia was a major titanium source — have elevated risk at tier-2 suppliers like Ducommun.",
+      },
+      {
+        name: "TransDigm Group",
+        provides: "Proprietary aerospace components across Boeing's fleet",
+        riskLevel: "Medium",
+        disruptionNote:
+          "TransDigm manufactures highly specialized, sole-source components with limited substitutes. If TransDigm raises prices or faces production issues, Boeing has few alternatives, making this a pricing and availability risk.",
+      },
     ],
     businessStages: [
       "1. Raw Materials & Parts — Titanium, aluminum, composites sourced from global suppliers",
@@ -285,6 +455,18 @@ function getBorderColor(impact: Signal["impact"]): string {
   if (impact === "Positive") return "#22c55e";
   if (impact === "Negative") return "#ef4444";
   return "#f59e0b";
+}
+
+function getRiskStyle(risk: Supplier["riskLevel"]): React.CSSProperties {
+  if (risk === "High") return { backgroundColor: "#fef2f2", color: "#b91c1c", border: "1px solid #fecaca" };
+  if (risk === "Medium") return { backgroundColor: "#fffbeb", color: "#b45309", border: "1px solid #fde68a" };
+  return { backgroundColor: "#f0fdf4", color: "#15803d", border: "1px solid #bbf7d0" };
+}
+
+function getSupplierBorderColor(risk: Supplier["riskLevel"]): string {
+  if (risk === "High") return "#ef4444";
+  if (risk === "Medium") return "#f59e0b";
+  return "#22c55e";
 }
 
 function getSignalCounts(signals: Signal[]) {
@@ -359,8 +541,6 @@ export default function StockPage({
                 {stock.companyName}
               </h1>
             </div>
-
-            {/* Signal count pills */}
             <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
               {negative > 0 && (
                 <div style={{ backgroundColor: "#fef2f2", border: "1px solid #fecaca", borderRadius: "8px", padding: "6px 14px", textAlign: "center" }}>
@@ -387,7 +567,7 @@ export default function StockPage({
           </p>
         </div>
 
-        {/* ── ACTIVE SIGNALS — moved to top, most prominent ── */}
+        {/* ── ACTIVE SIGNALS ── */}
         <div style={{ ...cardStyle, backgroundColor: "#fafafa" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "4px" }}>
             <h2 style={{ ...sectionHeadingStyle, marginBottom: 0, fontSize: "18px" }}>📡 Active Signals</h2>
@@ -399,10 +579,7 @@ export default function StockPage({
               {stock.recentSignals.length}
             </span>
           </div>
-          <p style={subtitleStyle}>
-            The news events and data points most likely to move this stock right now.
-          </p>
-
+          <p style={subtitleStyle}>The news events and data points most likely to move this stock right now.</p>
           <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
             {stock.recentSignals.map((signal, i) => (
               <div key={i} style={{
@@ -414,21 +591,11 @@ export default function StockPage({
                 boxShadow: "0 1px 4px rgba(0,0,0,0.05)",
               }}>
                 <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "8px", marginBottom: "10px" }}>
-                  <span style={{ fontSize: "15px", fontWeight: 700, color: "#111827" }}>
-                    {signal.title}
-                  </span>
-                  <span style={{
-                    backgroundColor: "#f3f4f6", color: "#374151",
-                    padding: "3px 10px", borderRadius: "999px",
-                    fontSize: "12px", fontWeight: 500,
-                  }}>
+                  <span style={{ fontSize: "15px", fontWeight: 700, color: "#111827" }}>{signal.title}</span>
+                  <span style={{ backgroundColor: "#f3f4f6", color: "#374151", padding: "3px 10px", borderRadius: "999px", fontSize: "12px", fontWeight: 500 }}>
                     {signal.type}
                   </span>
-                  <span style={{
-                    padding: "3px 10px", borderRadius: "999px",
-                    fontSize: "12px", fontWeight: 700,
-                    ...getImpactStyle(signal.impact),
-                  }}>
+                  <span style={{ padding: "3px 10px", borderRadius: "999px", fontSize: "12px", fontWeight: 700, ...getImpactStyle(signal.impact) }}>
                     {signal.impact}
                   </span>
                 </div>
@@ -445,7 +612,57 @@ export default function StockPage({
           </div>
         </div>
 
-        {/* ── Key Exposures ── */}
+        {/* ── KEY SUPPLIERS & PRODUCER RISK ── */}
+        <div style={cardStyle}>
+          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "4px" }}>
+            <h2 style={{ ...sectionHeadingStyle, marginBottom: 0 }}>🏭 Key Suppliers & Producer Risk</h2>
+          </div>
+          <p style={subtitleStyle}>
+            The companies that produce materials, parts, and finished goods for this stock.
+            A disruption at any high-risk supplier is a direct negative supply shock.
+          </p>
+
+          {/* Risk legend */}
+          <div style={{ display: "flex", gap: "10px", marginBottom: "16px", flexWrap: "wrap" }}>
+            {(["High", "Medium", "Low"] as const).map((r) => (
+              <span key={r} style={{ padding: "3px 10px", borderRadius: "999px", fontSize: "12px", fontWeight: 600, ...getRiskStyle(r) }}>
+                {r} Risk
+              </span>
+            ))}
+          </div>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+            {stock.keySuppliers.map((supplier, i) => (
+              <div key={i} style={{
+                backgroundColor: "#fafafa",
+                border: "1px solid #e5e7eb",
+                borderLeft: `4px solid ${getSupplierBorderColor(supplier.riskLevel)}`,
+                borderRadius: "10px",
+                padding: "16px 18px",
+              }}>
+                <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "8px", marginBottom: "6px" }}>
+                  <span style={{ fontSize: "14px", fontWeight: 700, color: "#111827" }}>{supplier.name}</span>
+                  <span style={{ padding: "3px 10px", borderRadius: "999px", fontSize: "12px", fontWeight: 700, ...getRiskStyle(supplier.riskLevel) }}>
+                    {supplier.riskLevel} Risk
+                  </span>
+                </div>
+                <p style={{ fontSize: "13px", color: "#6b7280", margin: "0 0 10px 0", fontStyle: "italic" }}>
+                  {supplier.provides}
+                </p>
+                <div style={{ backgroundColor: "white", borderRadius: "8px", padding: "10px 14px", border: "1px solid #e5e7eb" }}>
+                  <div style={{ fontSize: "11px", fontWeight: 700, color: "#9ca3af", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "4px" }}>
+                    If disrupted
+                  </div>
+                  <p style={{ fontSize: "13px", color: "#374151", lineHeight: "1.6", margin: 0 }}>
+                    {supplier.disruptionNote}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── KEY EXPOSURES ── */}
         <div style={cardStyle}>
           <h2 style={sectionHeadingStyle}>📌 Key Exposures</h2>
           <p style={subtitleStyle}>The main external factors that influence this company's revenue and profitability.</p>
@@ -459,7 +676,7 @@ export default function StockPage({
           </ul>
         </div>
 
-        {/* ── Business Stages ── */}
+        {/* ── BUSINESS STAGES ── */}
         <div style={cardStyle}>
           <h2 style={sectionHeadingStyle}>🔗 Business Stages</h2>
           <p style={subtitleStyle}>The operating chain from raw inputs to end customer — each stage is a potential point of strength or vulnerability.</p>
@@ -476,7 +693,7 @@ export default function StockPage({
           </div>
         </div>
 
-        {/* ── Investor Takeaway — dark card for visual weight ── */}
+        {/* ── INVESTOR TAKEAWAY ── */}
         <div style={{ ...cardStyle, backgroundColor: "#111827", border: "none" }}>
           <h2 style={{ ...sectionHeadingStyle, color: "white" }}>💡 Investor Takeaway</h2>
           <p style={{ fontSize: "14px", color: "#d1d5db", lineHeight: "1.8", margin: 0 }}>
